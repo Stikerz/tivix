@@ -22,3 +22,16 @@ class Teacher(AbstractUser):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+
+class StarStudent(models.Model):
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    star = models.BooleanField(null=False, blank=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['teacher', 'student'],
+                                    name='unique_star')
+        ]
+
