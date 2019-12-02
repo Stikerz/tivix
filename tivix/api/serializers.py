@@ -16,7 +16,6 @@ class TeacherSerializer(ModelSerializer):
         fields = ['username', 'first_name', 'last_name', 'email', 'students']
 
     def update(self, instance, validated_data):
-        # TODO : User Permission check - only user can edit own instance info
         instance.username = validated_data['username']
         instance.first_name = validated_data['first_name']
         instance.last_name = validated_data['last_name']
@@ -28,9 +27,9 @@ class TeacherSerializer(ModelSerializer):
 
 
 class StartStudentSerializer(ModelSerializer):
-    student = StudentSerializer(many=True)
-    teacher = TeacherSerializer(many=True)
-
     class Meta:
         model = StarStudent
         fields = ['teacher', 'student', 'star']
+
+
+
