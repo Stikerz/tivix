@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+# TODO: Slugify ?
+
 
 class Student(models.Model):
     first_name = models.CharField(max_length=150, blank=False, null=False)
