@@ -1,8 +1,6 @@
-from django.shortcuts import render
 from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
-    ListAPIView,
 )
 
 from rest_framework.permissions import IsAuthenticated
@@ -29,12 +27,12 @@ class StudentDetailView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
 
-class TeacherAPIView(ListAPIView):
-    """view for listing a queryset."""
+class TeacherAPIView(ListCreateAPIView):
+    """view for listing a queryset or create"""
 
     queryset = Teacher.objects.all()
     serializer_class = TeacherSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
 
 
 class TeacherDetailView(RetrieveUpdateDestroyAPIView):

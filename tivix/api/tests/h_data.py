@@ -13,6 +13,7 @@ TEACHERS = [
     },
     {
         "username": "teacher2",
+        "password": "lolll",
         "first_name": "two",
         "last_name": "two",
         "email": "two@tivix.com",
@@ -20,6 +21,7 @@ TEACHERS = [
     },
     {
         "username": "teacher3",
+        "password": "lolll",
         "first_name": "three",
         "last_name": "three",
         "email": "three@tivix.com",
@@ -28,3 +30,11 @@ TEACHERS = [
 ]
 
 INVALID_STUDENT = {"first_name": "", "last_name": "", "age": "", "year": None}
+INVALID_TEACHER = {
+    "username": "",
+    "password": "",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "students": [],
+}
