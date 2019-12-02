@@ -9,7 +9,7 @@ from ..models import Student, Teacher
 from ..serializers import TeacherSerializer
 
 
-class StudentViewTest(TestCase):
+class TeacherViewTest(TestCase):
     def setUp(self):
         teacher = Teacher.objects.create(**TEACHERS[0])
         teacher.set_password("gamora")
