@@ -38,3 +38,21 @@ INVALID_TEACHER = {
     "email": "",
     "students": [],
 }
+
+STAR = [
+    {
+        "teacher": 1,
+        "student": 2,
+        "star": True
+    },
+    {
+        "teacher": 1,
+        "student": 2,
+        "star": True
+    },
+    {
+        "teacher": 1,
+        "student": 3,
+        "star": False
+    }
+]
