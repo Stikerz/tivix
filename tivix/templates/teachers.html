@@ -1,0 +1,54 @@
+{% include 'base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+
+    <h4>Tivix Teachers</h4></br>
+
+    <div id="myteachers">
+
+        <table class="table table-dark">
+            <thead>
+            <tr>
+
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="teacher in teachers">
+<!--                <td><a :href="url + teacher.id">[[ teacher.first_name ]]</a></td>-->
+                <td>[[ teacher.first_name ]]</td>
+                <td>[[ teacher.last_name ]]</td>
+                <td>[[ teacher.email ]]</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        var app = new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#myteachers',
+            data: {
+                teachers: {},
+                url: '/api/teachers/'
+            },
+            methods: {
+                greet: function (name) {
+                    console.log('Hello from ' + name + '!')
+                }
+            },
+            mounted: function () {
+                axios.get('/api/teachers/').then(function (response) {
+                    console.log(response.data);
+                    this.teachers = response.data;
+                }.bind(this));
+            },
+        });
+    </script>
+</div>
+{% endblock %}
