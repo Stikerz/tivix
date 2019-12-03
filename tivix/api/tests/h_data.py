@@ -39,20 +39,12 @@ INVALID_TEACHER = {
     "students": [],
 }
 
-STAR = [
-    {
-        "teacher": 1,
-        "student": 2,
-        "star": True
-    },
-    {
-        "teacher": 1,
-        "student": 2,
-        "star": True
-    },
-    {
-        "teacher": 1,
-        "student": 3,
-        "star": False
-    }
+STARS = [
+    {"teacher": 1, "student": 1, "star": True},
+    {"teacher": 1, "student": 2, "star": True},
+    {"teacher": 1, "student": 3, "star": False},
 ]
+
+INVALID_STAR = {"teacher": None, "student": None, "star": None}
+
+UPDATED_STAR = {"teacher": 1, "student": 1, "star": False}
