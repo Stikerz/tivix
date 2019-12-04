@@ -7,7 +7,6 @@ class StudentSerializer(ModelSerializer):
         model = Student
         fields = ["id", "first_name", "last_name", "age", "year"]
 
-
 class TeacherSerializer(ModelSerializer):
     students = StudentSerializer(many=True)
 
@@ -39,13 +38,24 @@ class TeacherSerializer(ModelSerializer):
         instance.last_name = validated_data["last_name"]
         instance.email = validated_data["email"]
         instance.students.add(
-            *[Student.objects.get(**student) for student in validated_data["students"]]
+            *[Student.objects.get(**student) for student in
+              validated_data["students"]]
         )
 
         return instance
 
 
 class StartStudentSerializer(ModelSerializer):
+    student = StudentSerializer()
+
+    def create(self, validated_data):
+        teacher = validated_data["teacher"]
+        student = Student.objects.get(**validated_data["student"])
+        star = validated_data["star"]
+        d = {'teacher': teacher, 'student': student, 'star':star }
+        star_instance = StarStudent.objects.create(**d)
+        return star_instance
+
     class Meta:
         model = StarStudent
-        fields = ["teacher", "student", "star"]
+        fields = ["id", 'teacher', "student", "star"]

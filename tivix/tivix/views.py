@@ -25,3 +25,11 @@ def student(request, id=None):
     else:
         raise Http404("Page cannot be found")
 
+
+def star(request):
+    if request.user.is_authenticated:
+        context = {"id": request.user.id}
+        return render(request, 'star.html', context)
+    else:
+        raise Http404("Page cannot be found")
+
