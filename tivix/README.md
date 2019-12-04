@@ -1,4 +1,4 @@
-# Tivix School System
+# Tivix School System ( Django Rest Framework & Vue.js)
 
 
 ## Setup:
