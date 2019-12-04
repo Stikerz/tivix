@@ -56,6 +56,10 @@ class StartStudentSerializer(ModelSerializer):
         star_instance = StarStudent.objects.create(**d)
         return star_instance
 
+    def update(self, instance, validated_data):
+        instance.star = validated_data["star"]
+        return instance
+
     class Meta:
         model = StarStudent
         fields = ["id", 'teacher', "student", "star"]

@@ -40,11 +40,51 @@ INVALID_TEACHER = {
 }
 
 STARS = [
-    {"teacher": 1, "student": 1, "star": True},
-    {"teacher": 1, "student": 2, "star": True},
-    {"teacher": 1, "student": 3, "star": False},
+    {
+        "teacher": 1,
+        "student": {
+            "id": 1,
+            "first_name": "James",
+            "last_name": "Brown",
+            "age": "2019-02-04",
+            "year": 1,
+        },
+        "star": True,
+    },
+    {
+        "teacher": 1,
+        "student": {
+            "id": 2,
+            "first_name": "Lala",
+            "last_name": "Land",
+            "age": "2019-12-01",
+            "year": 4,
+        },
+        "star": True,
+    },
+    {
+        "teacher": 1,
+        "student": {
+            "id": 3,
+            "first_name": "Duol",
+            "last_name": "Cod",
+            "age": "2019-12-01",
+            "year": 2,
+        },
+        "star": False,
+    },
 ]
 
-INVALID_STAR = {"teacher": None, "student": None, "star": None}
+INVALID_STAR = {}
 
-UPDATED_STAR = {"teacher": 1, "student": 1, "star": False}
+UPDATED_STAR = {
+    "teacher": 1,
+    "student": {
+        "id": 1,
+        "first_name": "James",
+        "last_name": "Brown",
+        "age": "2019-02-04",
+        "year": 1,
+    },
+    "star": False,
+}
