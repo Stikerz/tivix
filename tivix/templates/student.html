@@ -1,0 +1,138 @@
+{% include 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div id="student">
+        {% if id is not None %}
+        <h4>[[student.first_name + " " + student.last_name]]</h4></br>
+        {% else %}
+        <h4>Register Student</h4></br>
+        {% endif %}
+
+        <body data="{{ id }}">
+
+
+        <form @submit.prevent="processForm">
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" class="form-control"
+                       id="firstname"
+                       v-model="fields.first_name"
+                >
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control"
+                       id="lastname"
+                       v-model="fields.last_name">
+            </div>
+            <div class="form-group">
+                <label>D.O.B</label>
+                <input type="date" class="form-control"
+                       id="date"
+                       v-model="fields.age">
+            </div>
+            <div class="form-group">
+                <label>Year</label>
+                <input type="number" class="form-control"
+                       id="year"
+                       v-model="fields.year">
+            </div>
+
+            {% if id is not None %}
+            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="button" class="btn btn-primary"
+                    @click="deleteStudent">Delete
+            </button>
+            {% else %}
+            <button type="submit" class="btn btn-primary">Post</button>
+            {% endif %}
+
+        </form>
+    </div>
+
+    <script>
+
+        var app = new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#student',
+            data: {
+                student: {},
+                url: '/api/students/',
+                id: null,
+                fields: {},
+                firstname: "",
+                lastname: "",
+                age: null,
+                year: 0,
+            },
+            beforeMount() {
+                this.id = JSON.parse(document.getElementsByTagName('body')[0].getAttribute('data') || '{}');
+                console.log(this.id);
+            },
+            mounted: function () {
+                if (this.id) {
+                    axios.get('/api/students/' + this.id).then(function
+                        (response) {
+                        this.student = response.data;
+                        this.fields.first_name = response.data.first_name;
+                        this.fields.last_name = response.data.last_name;
+                        this.fields.age = response.data.age;
+                        this.fields.year = response.data.year;
+                        this.fields.id = response.data.id;
+                        console.log(this.student);
+                    }.bind(this));
+                }
+            },
+            methods: {
+                processForm: function () {
+                    axios.defaults.xsrfCookieName = 'csrftoken';
+                    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+                    if (this.id) {
+                        axios({
+                            url: '/api/students/' + this.id + '/',
+                            method: 'put',
+                            data: this.fields,
+                        }).then(response => {
+                            console.log(response);
+                            //    TODO : Handle success with toast and refresh
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    } else {
+                        axios({
+                            url: '/api/students/',
+                            method: 'post',
+                            data: this.fields,
+                        }).then(response => {
+                            console.log(response);
+                            window.location.href = "/mystudents"
+                            //    TODO : Handle success with toast and refresh
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    }
+                },
+                deleteStudent: function () {
+                    axios.defaults.xsrfCookieName = 'csrftoken';
+                    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+                    axios.delete('/api/students/' + this.id + '/').then(function
+                        (response) {
+                        window.location.href = "/mystudents"
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+
+                }
+            },
+        });
+    </script>
+</div>
+{% endblock %}
+
+
+
+
+
+

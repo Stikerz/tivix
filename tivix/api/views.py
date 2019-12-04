@@ -2,7 +2,6 @@ from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
-
 from rest_framework.permissions import IsAuthenticated
 from .models import Teacher, Student, StarStudent
 from .serializers import StudentSerializer, TeacherSerializer, StartStudentSerializer

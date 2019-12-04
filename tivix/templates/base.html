@@ -35,9 +35,35 @@
                            href="/teachers">Teachers</a>
                     </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                        <a class="nav-link"
+                           href="/mystudents">My Students</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Stars</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                {% if not request.user.is_authenticated %}
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                {% else %}
+                       <li class="nav-item">
+                        <a class="nav-link" href="#">My
+                            Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Publish</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="#">Logout</a>
+                    </li>
+                {% endif %}
             </ul>
 
         </div>

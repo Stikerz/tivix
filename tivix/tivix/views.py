@@ -9,3 +9,19 @@ def teachers(request):
     else:
         raise Http404("Page cannot be found")
 
+
+def mystudents(request):
+    if request.user.is_authenticated:
+        context = {"id": request.user.id}
+        return render(request, 'mystudents.html', context)
+    else:
+        raise Http404("Page cannot be found")
+
+
+def student(request, id=None):
+    if request.user.is_authenticated:
+        context = {"id": id}
+        return render(request, 'student.html', context)
+    else:
+        raise Http404("Page cannot be found")
+
