@@ -9,7 +9,7 @@
 - Run python manage.py migrate
 - Run python manage.py createsuperuser
 - Run python manage.py runserver 
-- go to localhost:8000/admin #Login due to no login or register page completed as noted below.
+- go to localhost:8000/admin #Login with superuser due to no login or register page completed as noted below.
 - go to localhost:8000/mystudents
 
 
