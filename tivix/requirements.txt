@@ -7,7 +7,7 @@ Click==7.0
 coverage==4.5.4
 cycler==0.10.0
 decorator==4.4.1
-Django==2.2.7
+Django==2.2.8
 django-filter==2.2.0
 djangorestframework==3.10.3
 ipython==7.10.0
