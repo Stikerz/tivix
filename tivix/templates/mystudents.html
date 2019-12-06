@@ -33,16 +33,14 @@
         <form @submit.prevent="processForm">
             <div class="form-group">
                 <label>Select Student:</label>
-                <select multiple class="form-control" v-model="addStudents">
+                <select multiple class="form-control"
+                        v-model="addRemoveStudents">
                     <option v-for="student in allStudents" :value="student">
-                        [[ student.last_name + " " + student.first_name ]]
+                        [[ student.first_name + " " + student.last_name ]]
                     </option>
                 </select>
                 <button type="submit" class="btn btn-primary">Add to
                     Class
-                </button>
-                <button type="submit" class="btn btn-primary">Delete from
-                    class
                 </button>
                 <button type="submit" class="btn btn-primary"
                         @click="registerStudent">Register
@@ -55,6 +53,7 @@
 
 
     <script>
+
         var app = new Vue({
             delimiters: ['[[', ']]'],
             el: '#allstudents',
@@ -62,7 +61,7 @@
                 students: {},
                 url: '/student/',
                 id: null,
-                addStudents: [],
+                addRemoveStudents: [],
                 allStudents: [],
                 teacher: {},
                 componentKey: 3
@@ -72,13 +71,7 @@
                 console.log(this.id);
             },
             mounted: function () {
-                axios.get('/api/teachers/' + this.id).then(function
-                    (response) {
-                    this.students = response.data.students;
-                    this.teacher = response.data;
-
-                }.bind(this));
-
+                this.getTeacher();
                 this.getStudent();
             },
             methods: {
@@ -89,21 +82,28 @@
                         console.log(this.allStudents);
                     }.bind(this));
                 },
+                getTeacher: function () {
+                    axios.get('/api/teachers/' + this.id).then(function
+                        (response) {
+                        this.students = response.data.students;
+                        console.log("refresh", this.students);
+                        this.teacher = response.data;
+                    }.bind(this));
+
+                },
                 processForm: function () {
                     // TODO : Add check to see if submit info is empty
                     axios.defaults.xsrfCookieName = 'csrftoken';
                     axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-                    this.teacher.students = this.addStudents;
-                    console.log(this.teacher);
+                    this.teacher.students.push(...this.addRemoveStudents);
                     this.teacher.password = "dummy"; // TODO : Fix this
                     axios({
                         url: '/api/teachers/' + this.id + '/',
                         method: 'put',
                         data: this.teacher,
                     }).then(response => {
-                        // TODO : Add Toast and refresh table
-                        this.getStudent();
-                        window.location.href = "/mystudents" // Lazy approach
+                        // TODO : Add Toast
+                        this.getTeacher();
                     }).catch(err => {
                         console.log(err);
                     });

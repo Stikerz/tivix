@@ -37,6 +37,7 @@ class TeacherSerializer(ModelSerializer):
         instance.first_name = validated_data["first_name"]
         instance.last_name = validated_data["last_name"]
         instance.email = validated_data["email"]
+        instance.students.clear()
         instance.students.add(
             *[Student.objects.get(**student) for student in
               validated_data["students"]]
