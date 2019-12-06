@@ -4,7 +4,9 @@ from rest_framework.generics import (
 )
 from rest_framework.permissions import IsAuthenticated
 from .models import Teacher, Student, StarStudent
-from .serializers import StudentSerializer, TeacherSerializer, StartStudentSerializer
+from .serializers import StudentSerializer, TeacherSerializer, \
+    StartStudentSerializer
+
 
 # Create your views here.
 # TODO : User Permission check - only user can edit own instance info ect
@@ -60,14 +62,17 @@ class StudentStarAPIView(ListCreateAPIView):
         by filtering against a `username` query parameter in the URL.
         """
         queryset = StarStudent.objects.all()
-        params = self.request.query_params.get("star", None)
+        params_star = self.request.query_params.get("star", None)
+        params_all = self.request.query_params.get("all", "None")
         star = True
-
-        if params:
-            if params.lower() == "true" or params.lower() == "false":
-                star = params.lower() == "true"
-        queryset = queryset.filter(star=star, teacher=self.request.user)
-        return queryset
+        if params_all.lower() == "true":
+            return queryset
+        else:
+            if params_star:
+                if params_star.lower() == "true" or params_star.lower() == "false":
+                    star = params_star.lower() == "true"
+            queryset = queryset.filter(star=star, teacher=self.request.user)
+            return queryset
 
 
 class StudentStarDetailView(RetrieveUpdateDestroyAPIView):
