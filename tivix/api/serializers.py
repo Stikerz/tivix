@@ -14,7 +14,10 @@ class TeacherSerializer(ModelSerializer):
 
     class Meta:
         model = Teacher
-        extra_kwargs = {"password": {"required": False, "write_only": True }}
+        extra_kwargs = {
+            "password": {"required": False, "write_only": True},
+            "students": {"required": False},
+        }
         fields = [
             "username",
             "password",
@@ -37,11 +40,8 @@ class TeacherSerializer(ModelSerializer):
         students = validated_data.pop("students")
         teacher_instance = Teacher.objects.create(**validated_data)
         teacher_instance.set_password(password)
-        student_instances = [Student.objects.get(**student) for student in
-                             students]
-        teacher_instance.students.add(
-            *student_instances
-        )
+        student_instances = [Student.objects.get(**student) for student in students]
+        teacher_instance.students.add(*student_instances)
         teacher_instance.save()
         self.create_link(teacher_instance, student_instances)
         return teacher_instance
@@ -51,12 +51,11 @@ class TeacherSerializer(ModelSerializer):
         instance.first_name = validated_data["first_name"]
         instance.last_name = validated_data["last_name"]
         instance.email = validated_data["email"]
-        student_instances = [Student.objects.get(**student) for student in
-                             validated_data["students"]]
+        student_instances = [
+            Student.objects.get(**student) for student in validated_data["students"]
+        ]
         instance.students.clear()
-        instance.students.add(
-            *student_instances
-        )
+        instance.students.add(*student_instances)
         instance.save()
         self.create_link(instance, student_instances)
         return instance
@@ -69,7 +68,7 @@ class StartStudentSerializer(ModelSerializer):
         teacher = validated_data["teacher"]
         student = Student.objects.get(**validated_data["student"])
         star = validated_data["star"]
-        d = {'teacher': teacher, 'student': student, 'star': star}
+        d = {"teacher": teacher, "student": student, "star": star}
         star_instance, created = StarStudent.objects.get_or_create(**d)
 
         return star_instance
@@ -81,4 +80,4 @@ class StartStudentSerializer(ModelSerializer):
 
     class Meta:
         model = StarStudent
-        fields = ["id", 'teacher', "student", "star"]
+        fields = ["id", "teacher", "student", "star"]

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login,logout
 import json
 from api .models import Teacher
+from django.contrib.auth.hashers import check_password
 
 
 def teachers(request):
@@ -50,8 +51,11 @@ def signin(request):
         if request.method == "POST":
             try:
                 credentials = json.loads(request.body)
-                user = Teacher.objects.get(**credentials)
-                if user:
+                password = credentials['password']
+                username = credentials['username']
+                user = Teacher.objects.get(username=username)
+                crypted_password = user.password
+                if check_password(password, crypted_password):
                     login(request, user)
                     return redirect('/mystudents/')
             except Exception as e:
@@ -63,3 +67,10 @@ def signin(request):
 def signout(request):
     logout(request)
     return redirect('/')
+
+def register(request):
+    if request.user.is_authenticated:
+        return redirect('/mystudents/')
+    else:
+        context = {}
+        return render(request, 'register.html', context)

@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container">
-    <div id="teacher">
+    <div id="login">
         <h4>Login</h4></br>
 
         <form @submit.prevent="processForm">
@@ -31,7 +31,7 @@
 
         var app = new Vue({
             delimiters: ['[[', ']]'],
-            el: '#teacher',
+            el: '#login',
             data: {
                 credentials: {},
             },
@@ -51,6 +51,7 @@
                     });
                 },
                 register: function () {
+                    window.location.href = "/register"
                 }
             },
         });
