@@ -26,40 +26,45 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div id="navbarNavDropdown" class="navbar-collapse collapse">
+
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="/teachers">Teachers</a>
-                    </li>
+                {% if request.user.is_authenticated %}
+
                 <li class="nav-item">
-                        <a class="nav-link"
-                           href="/mystudents">My Students</a>
+                    <a class="nav-link"
+                       href="/teachers">Teachers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="/mystudents">My Students</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/star">My Stars</a>
                 </li>
+                {% endif %}
             </ul>
+
             <ul class="navbar-nav">
                 {% if not request.user.is_authenticated %}
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
                 {% else %}
-                       <li class="nav-item">
-                        <a class="nav-link" href="/profile">My
-                            Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="#">Logout</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">My
+                        Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="#">Logout</a>
+                </li>
                 {% endif %}
             </ul>
 

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import teachers, mystudents, student, star, profile
+from .views import teachers, mystudents, student, star, profile, signin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +28,6 @@ urlpatterns = [
     path('student/<int:id>/', student, name='student'),
     path('star/', star, name='star'),
     path('profile/', profile, name='profile'),
-
+    path('', signin, name='home'),
 ]
+

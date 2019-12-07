@@ -61,7 +61,7 @@ class StudentStarAPIView(ListCreateAPIView):
         Optionally restricts the returned star studenta to a given teacher,
         by filtering against a `username` query parameter in the URL.
         """
-        queryset = StarStudent.objects.all()
+        queryset = StarStudent.objects.all().filter(teacher=self.request.user)
         params_star = self.request.query_params.get("star", None)
         params_all = self.request.query_params.get("all", "None")
         star = True

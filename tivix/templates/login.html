@@ -1,0 +1,65 @@
+{% include 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div id="teacher">
+        <h4>Login</h4></br>
+
+        <form @submit.prevent="processForm">
+
+            <div class="form-group">
+                <label><b>Username</b></label>
+                <input type="text" class="form-control"
+                       placeholder="Enter Username"
+                       required v-model="credentials.username">
+            </div>
+            <div class="form-group">
+                <label><b>Password</b></label>
+                <input type="password" class="form-control"
+                       placeholder="Enter Password"
+                       required v-model="credentials.password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="button" class="btn btn-secodary"
+                    @click="register">Register
+            </button>
+        </form>
+    </div>
+
+    <script>
+
+        var app = new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#teacher',
+            data: {
+                credentials: {},
+            },
+            methods: {
+                processForm: function () {
+                    axios.defaults.xsrfCookieName = 'csrftoken';
+                    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+                    axios({
+                        url: '',
+                        method: 'post',
+                        data: this.credentials,
+                    }).then(response => {
+                        window.location.href = "/mystudents"
+                        //    TODO : Handle success with toast and refresh
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                },
+                register: function () {
+                }
+            },
+        });
+    </script>
+</div>
+{% endblock %}
+
+
+
+
+
+

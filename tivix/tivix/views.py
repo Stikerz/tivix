@@ -1,5 +1,8 @@
-from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render
+from django.http import  Http404
+from django.shortcuts import render, redirect
+from django.contrib.auth import login,logout
+import json
+from api .models import Teacher
 
 
 def teachers(request):
@@ -38,4 +41,22 @@ def star(request):
         return render(request, 'star.html', context)
     else:
         raise Http404("Page cannot be found")
+
+def signin(request):
+    """ Basic Authentication""" # TODO: CHANGE!!!!
+    if request.user.is_authenticated:
+        return redirect('/mystudents/')
+    else:
+        if request.method == "POST":
+            try:
+                credentials = json.loads(request.body)
+                user = Teacher.objects.get(**credentials)
+                if user:
+                    login(request, user)
+                    return redirect('/mystudents/')
+            except Exception as e:
+                pass
+            raise Http404("Page cannot be found")
+        context = {}
+        return render(request, 'login.html', context)
 
