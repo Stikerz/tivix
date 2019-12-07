@@ -60,3 +60,6 @@ def signin(request):
         context = {}
         return render(request, 'login.html', context)
 
+def signout(request):
+    logout(request)
+    return redirect('/')
