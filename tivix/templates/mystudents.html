@@ -96,7 +96,7 @@
                     axios.defaults.xsrfCookieName = 'csrftoken';
                     axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
                     this.teacher.students.push(...this.addRemoveStudents);
-                    this.teacher.password = "dummy"; // TODO : Fix this
+                    // this.teacher.password = "dummy"; // TODO : Fix this
                     axios({
                         url: '/api/teachers/' + this.id + '/',
                         method: 'put',

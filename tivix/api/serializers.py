@@ -14,7 +14,7 @@ class TeacherSerializer(ModelSerializer):
 
     class Meta:
         model = Teacher
-        extra_kwargs = {"password": {"write_only": True}}
+        extra_kwargs = {"password": {"required": False, "write_only": True }}
         fields = [
             "username",
             "password",

@@ -1,0 +1,118 @@
+{% include 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div id="teacher">
+        <h4>[[teacher.first_name + "'s "]]Profile</h4></br>
+
+
+        <body data="{{ id }}">
+
+
+        <form @submit.prevent="processForm">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control"
+                       id="username"
+                       v-model="fields.username"
+                >
+            </div>
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" class="form-control"
+                       id="firstname"
+                       v-model="fields.first_name"
+                >
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control"
+                       id="lastname"
+                       v-model="fields.last_name">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control"
+                       id="email"
+                       v-model="fields.email">
+            </div>
+            <div class="form-group">
+                <label>Password (optional)</label>
+                <input type="text" class="form-control"
+                       id="password"
+                       v-model="fields.password">
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="button" class="btn btn-primary"
+                    @click="deleteStudent">Delete
+            </button>
+        </form>
+    </div>
+
+    <script>
+
+        var app = new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#teacher',
+            data: {
+                teacher: {},
+                id: null,
+                fields: {},
+            },
+            beforeMount() {
+                this.id = JSON.parse(document.getElementsByTagName('body')[0].getAttribute('data') || '{}');
+            },
+            mounted: function () {
+                if (this.id) {
+                    axios.get('/api/teachers/' + this.id).then(function
+                        (response) {
+                        this.teacher = response.data;
+                        this.fields.first_name = response.data.first_name;
+                        this.fields.last_name = response.data.last_name;
+                        this.fields.username = response.data.username;
+                        this.fields.email = response.data.email;
+                        this.fields.students = response.data.students;
+                        // this.fields.password = ""
+                    }.bind(this));
+                }
+            },
+            methods: {
+                processForm: function () {
+                    axios.defaults.xsrfCookieName = 'csrftoken';
+                    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+                    if (this.id) {
+                        axios({
+                            url: '/api/teachers/' + this.id + '/',
+                            method: 'put',
+                            data: this.fields,
+                        }).then(response => {
+                            console.log(response);
+                            //    TODO : Handle success with toast and refresh
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    }
+                },
+                deleteStudent: function () {
+                    axios.defaults.xsrfCookieName = 'csrftoken';
+                    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+                    axios.delete('/api/teachers/' + this.id + '/').then(function
+                        (response) {
+                        window.location.href = "/logout"
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+
+                }
+            },
+        });
+    </script>
+</div>
+{% endblock %}
+
+
+
+
+
+
