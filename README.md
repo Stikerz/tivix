@@ -3,14 +3,9 @@
 
 ## Setup:
 
-- Create virtualenv(Optional) using python 3.6+
-- Run pip install -r requirements.txt
-- Run python manage.py makemigrations
-- Run python manage.py migrate
-- Run python manage.py createsuperuser
-- Run python manage.py runserver 
-- go to localhost:8000/admin #Login with superuser due to no login or register page completed as noted below.
-- go to localhost:8000/mystudents
+- Run docker-compose run web python tivix/manage.py migrate
+- Run docker-compose up
+- go to localhost:8000/
 
 
 ## API Endpoints
@@ -21,20 +16,8 @@
 - Create/List Stars : /api/star/ 
 - Retrieve/Update/Delete Star : /api/star/<PK\>
 
-
-## Template Endpoints
-- List Teachers : /teachers/ 
-- Create Student : /student/ 
-- List Teachers Student : /mystudents/ 
-- Retrieve/Update/Delete Student : /api/students/<PK\>
-- List Stars : /star/ 
-
 ## TODO
-- Register/ Login Teacher Template
 - GraphQL endpoint
-- Update Star FE implementation
-- Dockerization
-
 
 ## Testing
 - Run python manage.py test api.tests # Run test
