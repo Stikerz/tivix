@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
 # TODO: Slugify ?
 
 
@@ -25,6 +26,9 @@ class Teacher(AbstractUser):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+    def has_email(self):
+        return self.email is not None
+
 
 class StarStudent(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
@@ -36,4 +40,3 @@ class StarStudent(models.Model):
             models.UniqueConstraint(fields=['teacher', 'student'],
                                     name='unique_star')
         ]
-
