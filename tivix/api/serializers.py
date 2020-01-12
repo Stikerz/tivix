@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Teacher, Student, StarStudent
+from api.models import Teacher, Student, StarStudent
 from django.db import IntegrityError
 
 

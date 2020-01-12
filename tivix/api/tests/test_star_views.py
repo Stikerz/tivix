@@ -3,10 +3,10 @@ from django.test import TestCase
 from rest_framework.utils import json
 from rest_framework import status
 
-from .h_data import STUDENTS, TEACHERS, STARS, INVALID_STAR, UPDATED_STAR
+from api.tests.h_data import STUDENTS, TEACHERS, STARS, INVALID_STAR, UPDATED_STAR
 
-from ..models import Student, Teacher, StarStudent
-from ..serializers import StartStudentSerializer
+from api.models import Student, Teacher, StarStudent
+from api.serializers import StartStudentSerializer
 
 
 class StarViewTest(TestCase):

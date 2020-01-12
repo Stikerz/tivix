@@ -15,23 +15,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import teachers, mystudents, student, star, profile, signin, \
-    signout, register
+from tivix.views import (
+    teachers,
+    mystudents,
+    student,
+    star,
+    profile,
+    signin,
+    signout,
+    register,
+)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/students/', include('api.students.urls')),
-    path('api/teachers/', include('api.teachers.urls')),
-    path('api/star/', include('api.star.urls')),
-    path('teachers/', teachers, name='teachers'),
-    path('mystudents/', mystudents, name='mystudents'),
-    path('student/', student, name='nostudent'),
-    path('student/<int:id>/', student, name='student'),
-    path('star/', star, name='star'),
-    path('profile/', profile, name='profile'),
-    path('', signin, name='home'),
-    path('logout/', signout, name='logout'),
-    path('register/', register, name='register'),
-    path('oauth/', include('social_django.urls', namespace='social')),
+    path("admin/", admin.site.urls),
+    path("api/students/", include("api.students.urls")),
+    path("api/teachers/", include("api.teachers.urls")),
+    path("api/star/", include("api.star.urls")),
+    path("teachers/", teachers, name="teachers"),
+    path("mystudents/", mystudents, name="mystudents"),
+    path("student/", student, name="nostudent"),
+    path("student/<int:id>/", student, name="student"),
+    path("star/", star, name="star"),
+    path("profile/", profile, name="profile"),
+    path("", signin, name="home"),
+    path("logout/", signout, name="logout"),
+    path("register/", register, name="register"),
+    path("oauth/", include("social_django.urls", namespace="social")),
 ]
-

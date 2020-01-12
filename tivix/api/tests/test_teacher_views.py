@@ -3,10 +3,10 @@ from django.test import TestCase
 from rest_framework.utils import json
 from rest_framework import status
 
-from .h_data import STUDENTS, TEACHERS, INVALID_TEACHER
+from api.tests.h_data import STUDENTS, TEACHERS, INVALID_TEACHER
 
-from ..models import Student, Teacher
-from ..serializers import TeacherSerializer
+from api.models import Student, Teacher
+from api.serializers import TeacherSerializer
 
 
 class TeacherViewTest(TestCase):

@@ -3,9 +3,8 @@ from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView,
 )
 from rest_framework.permissions import IsAuthenticated
-from .models import Teacher, Student, StarStudent
-from .serializers import StudentSerializer, TeacherSerializer, \
-    StartStudentSerializer
+from api.models import Teacher, Student, StarStudent
+from api.serializers import StudentSerializer, TeacherSerializer, StartStudentSerializer
 
 
 # Create your views here.
@@ -33,7 +32,7 @@ class TeacherAPIView(ListCreateAPIView):
 
     queryset = Teacher.objects.all()
     serializer_class = TeacherSerializer
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
 
 
 class TeacherDetailView(RetrieveUpdateDestroyAPIView):
