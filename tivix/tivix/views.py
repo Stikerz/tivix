@@ -39,7 +39,7 @@ def profile(request):
             github_login = user.social_auth.get(provider="github")
         except UserSocialAuth.DoesNotExist:
             github_login = None
-        can_disconnect = user.social_auth.count() >= 1 or (
+        can_disconnect = user.social_auth.count() >= 1 and (
             user.has_email() and user.has_usable_password()
         )
         context = {
