@@ -47,6 +47,9 @@ class TeacherSerializer(ModelSerializer):
         return teacher_instance
 
     def update(self, instance, validated_data):
+        if "password" in validated_data:
+            password = validated_data.pop("password")
+            instance.set_password(password)
         instance.username = validated_data["username"]
         instance.first_name = validated_data["first_name"]
         instance.last_name = validated_data["last_name"]
