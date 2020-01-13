@@ -27,36 +27,32 @@
 
 ```
 
-Name                                        Stmts   Miss  Cover
+Name                              Stmts   Miss  Cover   Missing
 ---------------------------------------------------------------
-__init__.py                                     0      0   100%
-api/__init__.py                                 0      0   100%
-api/admin.py                                    5      0   100%
-api/apps.py                                     3      3     0%
-api/migrations/0001_initial.py                  8      0   100%
-api/migrations/0002_auto_20191201_0303.py       4      0   100%
-api/migrations/0003_auto_20191201_0304.py       4      0   100%
-api/migrations/0004_auto_20191201_0409.py       6      0   100%
-api/migrations/0005_auto_20191201_0828.py       4      0   100%
-api/migrations/__init__.py                      0      0   100%
-api/models.py                                  23      2    91%
-api/serializers.py                             41      0   100%
-api/star/urls.py                                3      0   100%
-api/students/__init__.py                        0      0   100%
-api/students/urls.py                            3      0   100%
-api/teachers/urls.py                            3      0   100%
-api/tests/__init__.py                           0      0   100%
-api/tests/h_data.py                             7      0   100%
-api/tests/test_star_views.py                   79      0   100%
-api/tests/test_student_views.py                59      0   100%
-api/tests/test_teacher_views.py                59      0   100%
-api/views.py                                   36      0   100%
-manage.py                                      12      2    83%
-tivix/__init__.py                               0      0   100%
-tivix/settings.py                              21      0   100%
-tivix/urls.py                                   4      0   100%
-tivix/views.py                                 22     16    27%
-tivix/wsgi.py                                   4      4     0%
+__init__.py                           0      0   100%
+api/__init__.py                       0      0   100%
+api/admin.py                          5      0   100%
+api/models.py                        21      0   100%
+api/serializers.py                   57      5    91%   32-36
+api/star/__init__.py                  0      0   100%
+api/star/urls.py                      3      0   100%
+api/students/__init__.py              0      0   100%
+api/students/urls.py                  3      0   100%
+api/teachers/__init__.py              0      0   100%
+api/teachers/urls.py                  3      0   100%
+api/tests/__init__.py                 0      0   100%
+api/tests/h_data.py                   7      0   100%
+api/tests/test_models.py             58      0   100%
+api/tests/test_star_views.py         79      0   100%
+api/tests/test_student_views.py      59      0   100%
+api/tests/test_teacher_views.py      59      0   100%
+api/views.py                         39      1    97%   68
+tivix/__init__.py                     0      0   100%
+tivix/settings.py                    34      0   100%
+tivix/tests.py                       90      0   100%
+tivix/urls.py                         4      0   100%
+tivix/views.py                       64      2    97%   82-83
 ---------------------------------------------------------------
-TOTAL                                         410     27    93%
+TOTAL                               585      8    99%
+
 ```
