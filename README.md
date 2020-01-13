@@ -2,7 +2,7 @@
 
 
 ## Setup:
-
+- Run docker-compose build
 - Run docker-compose run web python manage.py migrate
 - Run docker-compose up
 - go to localhost:8000/
