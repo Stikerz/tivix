@@ -11,7 +11,7 @@ class Student(models.Model):
     age = models.DateField(null=False)
     year = models.IntegerField(null=False)
 
-    def __str__(self):
+    def __str__(self):  # pragma: no cover
         return f"{self.first_name} {self.last_name}"
 
 
@@ -23,7 +23,7 @@ class Teacher(AbstractUser):
 
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
-    def __str__(self):
+    def __str__(self):  # pragma: no cover
         return f"{self.first_name} {self.last_name}"
 
     def has_email(self):

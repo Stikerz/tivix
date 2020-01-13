@@ -47,6 +47,7 @@ class TestUserSocialAuth(TestCase):
 
     def test_changed(self):
         self.user.email = eml = "test@example.com"
+        self.assertTrue(self.user.has_email())
         UserSocialAuth.changed(user=self.user)
         db_eml = self.user_model.objects.get(username=self.user.username).email
         self.assertEqual(db_eml, eml)
