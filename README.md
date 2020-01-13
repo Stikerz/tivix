@@ -1,4 +1,4 @@
-# Tivix School System
+# Tivix School System ( Django Rest Framework & Vue.js)
 
 
 ## Setup:
@@ -20,7 +20,7 @@
 - GraphQL endpoint
 
 ## Testing
-- Run python manage.py test api.tests # Run test
+- Run python manage.py test api.tests tivix.tests # Run test
 
 
 ## Coverage (so far) (No front-end tests completed)
